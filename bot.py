@@ -10,7 +10,7 @@ def keep_alive():
     t = Thread(target=run)
     t.start()
 
-TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
+TOKEN = '9217613909:AAHV589DUCO2108DJRuNqNcWA06gvcQDYeA'
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
@@ -19,22 +19,22 @@ def send_welcome(message): bot.reply_to(message, "សួស្តី! សូម�
 @bot.message_handler(func=lambda message: True)
 def download_tiktok(message):
     # កាត់យកតែលីងសុទ្ធ លុបចោលកន្ទុយដែលមានសញ្ញា ?
-    url = message.text.split('?')[0]
-
+    url = message.text.split('?')[0] 
+    
     if 'tiktok.com' in url or 'vt.tiktok.com' in url:
         bot.reply_to(message, "កំពុងដំណើរការ... ⏳")
         try:
             # បន្ថែម User-Agent ការពារការ Block ពី API
             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
             res = requests.get(f"https://www.tikwm.com/api/?url={url}", headers=headers).json()
-
-            if res.get('code') == 0:
+            
+            if res.get('code') == 0: 
                 bot.send_video(message.chat.id, res['data']['play'])
-            else:
+            else: 
                 bot.reply_to(message, "មិនអាចដោនឡូតបានទេ។")
-        except:
+        except: 
             bot.reply_to(message, "មានបញ្ហាបច្ចេកទេស។")
-    else:
+    else: 
         bot.reply_to(message, "សូមបញ្ជូនលីង TikTok អោយបានត្រឹមត្រូវ។")
 
 if __name__ == "__main__":
